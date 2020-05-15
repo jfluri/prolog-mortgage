@@ -1,5 +1,4 @@
 
-#thanksgiving to our wise and beloved Holger Wache
 
 # Calculations
 # =========================================================
@@ -36,44 +35,61 @@
 # Provided Cash Ratio = Capital/Loan
 # =========================================================
 
-
-
 # Virtual API for ZEK Entries
-ZEKEntry(Beatrice, Sutter).
-ZEKEntry(Karin, Keller).
-ZEKEntry(Peter, Meier).
-ZEKEntry(Melanie, Graber).
-ZEKEntry(Stephan, Ospel).
-ZEKEntry(Holger, Wache).
+zekEntry("Beatrice", "Sutter").
+zekEntry("Karin", "Keller").
+zekEntry("Peter", "Meier").
+zekEntry("Melanie", "Graber").
+zekEntry("Stephan", "Ospel").
+zekEntry("Holger", "Wache").
 
 # Virtual API for Pythagoras Entry
 # Checks if a Person is in the Pythagoras list (which is not good)
-pythagorasEntry(Max, Mustermann).
-pythagorasEntry(Hans, Mustermann).
-pythagorasEntry(Hans, Tester).
-pythagorasEntry(Hans, Müller).
-pythagorasEntry(Hans, Holzer).
-pythagorasEntry(Rolf, Mustermann).
+pythagorasEntry("Max", "Muster").
+pythagorasEntry("Hans", "Glauser").
+pythagorasEntry("Hans", "Tester").
+pythagorasEntry("Hans", "Müller").
+pythagorasEntry("Hans", "Holzer").
+pythagorasEntry("Rolf", "Mustermann").
 
-ProvidedCashRatio(capital, loan):- = capital/loan. 
+providedCashRatio(Capital, Loan):- = Capital/Loan. 
 # >40% || <=30% || >30% <=40%
 
-CalculatoryAfforadbility(totalLiability, income X):-  X = (totalLiability/Income).
+calculatoryAfforadbility(TotalLiability, Income, X):-  X = (TotalLiability/Income).
 
 #Variante 1 mit Baum
 # When a ZEK Entry exists, the mortgage is not approved
 isApproved(FirstName, LastName):- isApprovedLevelPCRVariant1(), CalculatoryAfforadbility() <=0.3.
 isApproved(FirstName, LastName):- isApprovedLevelPCRVariant2(), CalculatoryAfforadbility() <=0.4.
-isApprovedLevelPCRVariant1(FirstName, LastName):- isApprovedLevelPYTH(FirstName, LastName), ProvidedCashRatio() >=0.2, ProvidedCashRatio() <0.3.
-isApprovedLevelPCRVariant2(FirstName, LastName):- isApprovedLevelPYTH(FirstName, LastName), ProvidedCashRatio() >=0.3.
+isApprovedLevelPCRVariant1(FirstName, LastName):- isApprovedLevelPYTH(FirstName, LastName), providedCashRatio() >=0.2, ProvidedCashRatio() <0.3.
+isApprovedLevelPCRVariant2(FirstName, LastName):- isApprovedLevelPYTH(FirstName, LastName), providedCashRatio() >=0.3.
 isApprovedLevelPYTH(FirstName, LastName):- isApprovedLevelZEK(), not(pythagorasEntry(FirstName, LastName)).
-isApprovedLevelZEK(FirstName, LastName):- not(ZEKEntry(Firstname, LastName).
+isApprovedLevelZEK(FirstName, LastName):- not(zekEntry(Firstname, LastName).
 
 ?- isApproved(FirstName, LastName).
 
 
+# COMPLETE EXAMPLE
+isApproved(FirstName, LastName, Age, Income, Capital, Loan, TotalLiability, EstateSqm, PropSpecs, BuildingSqm, PropSqmPrice, Correction, Security):- 
+    isApprovedLevelPCRVariant1(FirstName, LastName, Capital, Loan), CalculatoryAfforadbility(TotalLiability, Income) <=0.3.
 
+isApproved(FirstName, LastName, Age, Income, Capital, Loan, TotalLiability, EstateSqm, PropSpecs, BuildingSqm, PropSqmPrice, Correction, Security):- 
+    isApprovedLevelPCRVariant1(FirstName, LastName, Capital, Loan), CalculatoryAfforadbility(TotalLiability, Income) <=0.4.
 
+isApprovedLevelPCRVariant1(FirstName, LastName, Capital, Loan):- 
+    isApprovedLevelPYTH(FirstName, LastName), providedCashRatio(Capital, Loan) >=0.2, ProvidedCashRatio(Capital, Loan) <0.3.
+
+isApprovedLevelPCRVariant2(FirstName, LastName, Capital, Loan):- 
+    isApprovedLevelPYTH(FirstName, LastName), providedCashRatio(Capital, Loan) >=0.3.
+
+isApprovedLevelPYTH(FirstName, LastName):- 
+    isApprovedLevelZEK(Firstname, LastName), not(pythagorasEntry(FirstName, LastName)).
+
+isApprovedLevelZEK(FirstName, LastName):- 
+    not(ZEKEntry(Firstname, LastName).
+
+# Example Mortage Application
+?- isApproved(Max, Muster, 36, 12000, 1200000, 800000, 15000, 800, 1, 300, 1000, -10000, 100000 ).
 
 
 
