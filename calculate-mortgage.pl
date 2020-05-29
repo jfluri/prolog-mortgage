@@ -288,6 +288,9 @@ garage(X,Y):- X="Carport", Y=2.
 garage(X,Y):- X="Nein", Y=1.
 
 
+#trace,isApproved("Holger", "Wache", 20, 300000, 200000, 10000, 500, 1000, 200, 10, 5, 200, 20, 200, 3, "Sheddach", 200, "Doppel" )
+
+
 ========================================================= SUCCESS ======================================
 
 isApproved(FirstName, LastName, PropertyAge, Income, Capital, Security, EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage):- 
