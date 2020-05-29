@@ -363,7 +363,7 @@ depreciationrate(PropertyAge,Y):- PropertyAge=<90, PropertyAge>85, Y=80.
 depreciationrate(PropertyAge,Y):- PropertyAge=<95, PropertyAge>90, Y=86.
 depreciationrate(PropertyAge,Y):- PropertyAge>95, Y=92.
 
-depreciation(PropertyPrice,PropertyAge,Z):- depreciationrate(PropertyAge, X), Z is PropertyPrice * X.
+depreciation(PropertyPrice,PropertyAge,Z):- depreciationrate(PropertyAge, X), Z is PropertyPrice * (X/100).
 
 loan(EstateSqm, 
      EstatePriceSqm, 
