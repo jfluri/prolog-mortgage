@@ -36,9 +36,11 @@
 
 % Example Mortage Application
 isApproved("Holger", "Wache", 20, 300000, 50000, 150000, 500, 1000, 200, 10, 5 , 200, 20, 200, 3, "Sheddach", 200, "Doppel" ).
-% Add more examples here
+isApproved("Hermann", "Grieder", 5, 200000, 150000, 250000, 1000, 650, 350, 2, 7 , 350, 22, 200, 2, "Mansardendach", 100, "Carport" ).
+isApproved("Michael", "Jordan", 15, 5000000, 1500000, 800000, 3000, 2000, 2000, 10, 10 , 400, 100, 400, 7, "Pultdach", 400, "Einzel" ).
+isApproved("Peter", "Pan", 8, 50000, 2500, 150000, 500, 1000, 200, 100, 3, 190, 50, 320, 1, "Flachdach", 600, "Nein" ).
 
-% INPUT - Example Queries
+% INPUT - Queries
 
 isApproved(FirstName, LastName, PropertyAge, Income, Capital, Security, EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage):- 
     loan(EstateSqm, EstatePriceSqm, Distance, PropertyM3, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage,PropertyAge, X), 
@@ -53,15 +55,19 @@ isApproved(FirstName, LastName, PropertyAge, Income, Capital, Security, EstateSq
     Z=<0.4.
 
 isApprovedLevelPCRVariant1(FirstName, LastName, Capital, Loan):- 
-    isApprovedLevelPYTH(FirstName, LastName), providedCashRatio(Capital, Loan, X),
+    isApprovedLevelPYTH(FirstName, LastName), 
+    providedCashRatio(Capital, Loan, X),
     X >=0.2, providedCashRatio(Capital, Loan, Z),
     Z <0.3.
 
 isApprovedLevelPCRVariant2(FirstName, LastName, Capital, Loan):- 
-    isApprovedLevelPYTH(FirstName, LastName), providedCashRatio(Capital, Loan, X),
+    isApprovedLevelPYTH(FirstName, LastName), 
+    providedCashRatio(Capital, Loan, X),
     X >=0.3.
+    
 isApprovedLevelPYTH(FirstName, LastName):- 
-    isApprovedLevelZEK(FirstName, LastName), not(pythagorasEntry(FirstName, LastName)).
+    isApprovedLevelZEK(FirstName, LastName), 
+    not(pythagorasEntry(FirstName, LastName)).
 
 isApprovedLevelZEK(FirstName, LastName):- 
     not(zekEntry(FirstName, LastName)).
