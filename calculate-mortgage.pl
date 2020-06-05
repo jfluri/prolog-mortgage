@@ -312,6 +312,9 @@ garage(X,Y):- X="Nein", Y=1.% Depreciation Rate = Depreciation Table (PropertyAg
 % =========================================================
 
 
+#trace,isApproved("Holger", "Wache", 20, 300000, 200000, 10000, 500, 1000, 200, 10, 5, 200, 20, 200, 3, "Sheddach", 200, "Doppel" )
+
+
 ========================================================= SUCCESS ======================================
 
 % Example Mortage Application
