@@ -45,6 +45,8 @@ isApproved("Michael", "Jordan", 15, 5000000, 1500000, 800000, 3000, 2000, 2000, 
 isApproved("Peter", "Pan", 8, 50000, 2500, 150000, 500, 1000, 200, 100, 3, 190, 50, 320, 1, "Flachdach", 600, "Nein" ).
 % False
 
+% 7 total cases according to decision matrix
+
 % INPUT - Queries
 
 isApproved(FirstName, LastName, PropertyAge, Income, Capital, Security, EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage):- 
