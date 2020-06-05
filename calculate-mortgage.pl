@@ -1,82 +1,78 @@
-# Calculations
-# =========================================================
-# Estate Price = [Estate m2] * [Estate Price per m2]
+% Calculations
+% =========================================================
+% Estate Price = [Estate m2] * [Estate Price per m2]
 
-# Property Price per m3 = Property Price Assessment (Property specification)
+% Property Price per m3 = Property Price Assessment (Property specification)
 
-# Property Price =[ Building m3] * [Property Price per m3]
+% Property Price =[ Building m3] * [Property Price per m3]
 
-# Depreciation Rate = Depreciation Table (PropertyAge)
+% Depreciation Rate = Depreciation Table (PropertyAge)
 
-# Depreciation = (Building Price + Outbuilding Price) * Depreciation Rate
+% Depreciation = (Building Price + Outbuilding Price) * Depreciation Rate
 
-# Loan = Estate Price + Property Price + Outbuildings Price – Depreciation + Environment + [Correction]
+% Loan = Estate Price + Property Price + Outbuildings Price – Depreciation + Environment + [Correction]
 
-# Required Mortgage = [Loan] - [Capital]
+% Required Mortgage = [Loan] - [Capital]
 
-# First Mortgage = (66% of Loan) - [Security]
+% First Mortgage = (66% of Loan) - [Security]
 
-# Second Mortgage = 14% of [Loan]
+% Second Mortgage = 14% of [Loan]
 
-# Total Mortgage = First Mortgage + Second Mortgage
+% Total Mortgage = First Mortgage + Second Mortgage% Calculations
 
-# Mortgage Interest = 5% (First Mortgage + Second Mortgage)
+% Mortgage Interest = 5% (First Mortgage + Second Mortgage)
 
-# Additional Costs p.a. = 1% of Loan excl. Property Price p.a.
+% Additional Costs p.a. = 1% of Loan excl. Property Price p.a.
 
-# Total Liabilities p.a. = Additional Costs p.a. + Mortgage Interest p.a.
+% Total Liabilities p.a. = Additional Costs p.a. + Mortgage Interest p.a.
 
-# Calculatory Affordability = Total Liabilities / [Income]
+% Calculatory Affordability = Total Liabilities / [Income]
 
-# Provided Cash Ratio = Capital/Loan
-# =========================================================
-
-
-# Expert Knowledge // Property Price Sqm Calculation
-# =========================================================
+% Provided Cash Ratio = Capital/Loan
+% =========================================================
 
 
+========================================================= SUCCESS ======================================
 
-# =========================================================
+% Example Mortage Application
+isApproved("Holger", "Wache", 20, 300000, 50000, 150000, 500, 1000, 200, 10, 5 , 200, 20, 200, 3, "Sheddach", 200, "Doppel" ).
+% Add more examples here
 
-# EXAMPLE QUERIES / INPUT
+% INPUT - Example Queries
+
 isApproved(FirstName, LastName, PropertyAge, Income, Capital, Security, EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage):- 
-    loan(EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, PropertyAge, X), 
+    loan(EstateSqm, EstatePriceSqm, Distance, PropertyM3, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage,PropertyAge, X), 
     isApprovedLevelPCRVariant1(FirstName, LastName, Capital, X), 
-    calculatoryAfforadbility(Income, Security, X),
-    X =<0.3.
+    calculatoryAfforadbility(X, Income, Security, Z),
+    Z=<0.3.
 
 isApproved(FirstName, LastName, PropertyAge, Income, Capital, Security, EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage):- 
-    loan(EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, PropertyAge, X), 
-    isApprovedLevelPCRVariant2(FirstName, LastName, Capital, X), 
-    calculatoryAfforadbility(Income, Security, X),
-    X =<0.4.
+    loan(EstateSqm, EstatePriceSqm, =====nce, PropertyM3, Rooms, RoomPriceSqm, KitchenSqm, Kitche=Pri=eSqm, Floors, Roof, Basem=ntSqm,=Garage,Proper=yAge, X), 
+    isAppr=vedLevelPCRVariant2(FirstName, LastName, Capital, X), 
+   =cal=ulatoryAfforadbil===(X, Income,=Se=urity, Z),
+    Z=<0.4.
 
-isApprovedLevelPCRVariant1(FirstName, LastName, Capital, Loan):- 
-    isApprovedLevelPYTH(FirstName, LastName), providedCashRatio(Capital, Loan, X),
-    X >=0.2, providedCashRatio(Capital, Loan, Z),
-    Z <0.3.
-
-isApprovedLevelPCRVariant2(FirstName, LastName, Capital, Loan):- 
+isApprovedLevelPCRVariant1(FirstName, LastNam=, Capital, Loa=):- 
+    isApprovedLevelPYTH(FirstName, Las=Name), provid=dCashRatio(Capital, Loan, X),
+    X >=0.2, p=ovidedCashRatio(Capital, Loan, Z),
+    Z <0.3.==================================
+% Estate Price = [Estate m2] * [Estate Price per m2]
+isApprovedLevelPCRVariant2(FirstName,Lastame, Capital, Loan):- 
     isApprovedLevelPYTH(FirstName, LastName), providedCashRatio(Capital, Loan, X),
     X >=0.3.
-
 isApprovedLevelPYTH(FirstName, LastName):- 
     isApprovedLevelZEK(FirstName, LastName), not(pythagorasEntry(FirstName, LastName)).
 
 isApprovedLevelZEK(FirstName, LastName):- 
-    not(zekEntry(Firstname, LastName)).
+    not(zekEntry(FirstName, LastName)).
 
-# Example Mortage Application
-?- isApproved("Holger", "Wache", 20, 300000, 50000, 150000, 500, 1000, 10,5 , 200, 20, 200, 3, "Sheddach", 200, "Doppelgarage" ).
-#  isApproved("Holger", "Wasche", 20, 300000, 50000, 10000, 500, 1000, 200, 10, 5, 200, 20, 200, 3, "Sheddach", 200, "Doppel" )
 
-# Calculations
-# =========================================================
-# Estate Price = [Estate m2] * [Estate Price per m2]
+% Calculations
+% =========================================================
+% Estate Price = [Estate m2] * [Estate Price per m2]
 estateprice(EstateSqm, EstatePriceSqm, X):- X is EstateSqm * EstatePriceSqm.
 
-# Property Price =[ Building m3] * [Property Price per m3]
+% Property Price =[ Building m3] * [Property Price per m3]
 propertyprice(  
     Propertym3, 
     Distance, 
@@ -88,7 +84,7 @@ propertyprice(
     Roof, 
     BasementSqm, 
     Garage, Y):- 
-        Y = Propertym3 * propertypricecalculation(
+    propertypricecalculation(
             Distance, 
             Nrooms, 
             RoomPriceSqm, 
@@ -97,9 +93,11 @@ propertyprice(
             Floors, 
             Roof, 
             BasementSqm, 
-            Garage).
+            Garage,
+        	X),
+        Y is Propertym3 * X.
 
-# Depreciation Rate = Depreciation Table (PropertyAge)
+% Depreciation Rate = Depreciation Table (PropertyAge)
 depreciationrate(PropertyAge,Y):- PropertyAge=<5, Y=1.
 depreciationrate(PropertyAge,Y):- PropertyAge=<10, PropertyAge>5, Y=3.
 depreciationrate(PropertyAge,Y):- PropertyAge=<15, PropertyAge>10, Y=7.
@@ -120,14 +118,13 @@ depreciationrate(PropertyAge,Y):- PropertyAge=<90, PropertyAge>85, Y=80.
 depreciationrate(PropertyAge,Y):- PropertyAge=<95, PropertyAge>90, Y=86.
 depreciationrate(PropertyAge,Y):- PropertyAge>95, Y=92.
 
-# Depreciation = (Property Price) * Depreciation Rate
-depreciation(PropertyPrice,PropertyAge,Z):- depreciationrate(PropertyAge, Rate), Z is PropertyPrice * Rate.
+depreciation(PropertyPrice,PropertyAge,Z):- depreciationrate(PropertyAge, X), Z is PropertyPrice * (X/100).
 
-# Loan = Estate Price + Property Price  – Depreciation
+% Loan = Estate Price + Property Price  – Depreciation
 loan(EstateSqm, 
      EstatePriceSqm, 
-     PropertyM3, 
-     Distance, 
+     Distance,
+     PropertyM3,
      Rooms, 
      RoomPriceSqm, 
      KitchenSqm, 
@@ -136,8 +133,7 @@ loan(EstateSqm,
      Roof, 
      BasementSqm, 
      Garage, 
-     PropertyAge, 
-     X):- 
+     PropertyAge, X):- 
         estateprice(EstatePriceSqm, EstateSqm, U), 
         propertyprice(
                 PropertyM3, 
@@ -154,32 +150,38 @@ loan(EstateSqm,
         depreciation(V, PropertyAge,W), 
         X is U+V-W.
 
-# First Mortgage = (66% of loan) - [Security
-firstMortgage(Loan,Security,X):- X is (Loan * 0.66) - Security.
-# Second Mortgage = 14% of [loan]
-secondMortgage(Loan,X):- X is (Loan * 0.14).
-# Mortgage Interest = 5% (First Mortgage + Second Mortgage)
-mortageInterest(Loan, Security, Z):- firstMortage(Loan, Security, X), secondMortage(Loan, Y), Z is (X+Y) * 0.05.
-# Additional Costs p.a. = 1% of Loan p.a.
-additionalCost(Loan,X):- X is Loan * 0.01.
-# Total Liabilities p.a. = Additional Costs p.a. + Mortgage Interest p.a.
-totalLiabilites(Loan, Security, Z):-  additionalCost(Loan, X), mortageInterest(Loan, Security, Y), Z is X+Y.
-# Calculatory Affordability = Total Liabilities / [Income]
-calculatoryAfforadbility(Loan, Income, Security, Z):- X = totalLiabilites(Loan, Security, X), Z is X/Income.
-# Provided Cash Ratio = Capital/Loan
-cashRatio(Capital,Loan, X) :- X is Capital/Loan.
-# =========================================================
+% First Mortgage = (66% of loan) - [Security]
+firstMortgage(Loan,Security,X):- X is (Loan * 0.66) - Secrity.
 
-# Virtual API for ZEK Entries
+% Second Mortgage = 14% of [loan]
+secondMortgage(Loan,X):- X is (Loan * 0.14).
+
+% Mortgage Interest = 5% (First Mortgage + Second Mortgage)
+ortageInterest(Loan, Security, Z):- firstMortgage(Loan, Security, X), secondMortgage(Loan, Y), Z is (X+Y) * 0.05.
+
+% Additional Costs p.a. = 1% of Loan p.a.
+additionalCost(Loan,X):- X is (Loan * 0.01).
+
+% Total Liailities p.a. = Additional Costs p.a. + Mortgage Intestp.a.
+ttalLiabilites(Loan, Security, Z):-  additionalCost(Loan, X), mortageInterest(Loan, Security, Y), Z is X+Y.
+
+% Calculatory Afordability= Total Liabilities / [Income]
+calculatoryAffoadbility(Lan, Ince, Security, Z):- totalLiabilites(Loan, Security, X), Z i X/Income.
+% Property Price per m3 = Property Price Assessment (Property specification)
+% Provided Cash Ratio = Capital/Loan
+providedCashRatio(Capital, Loan, X):- X is (Capital/Loan). 
+
+% Virtual API for ZEK Entries
+% Checks if a Person has a ZEK Entry (which is not good)
 zekEntry("Beatrice", "Sutter").
 zekEntry("Karin", "Keller").
 zekEntry("Peter", "Meier").
 zekEntry("Melanie", "Graber").
 zekEntry("Stephan", "Ospel").
-zekEntry("Holger", "Wache").
+zekEntry("Holger", "Wache").% Property Price =[ Building m3] * [Property Price per m3]
 
-# Virtual API for Pythagoras Entry
-# Checks if a Person is in the Pythagoras list (which is not good)
+% Virtual API for Pythagoras Entry
+% Checks if a Person is in the Pythagoras list (which is not good)
 pythagorasEntry("Max", "Muster").
 pythagorasEntry("Hans", "Glauser").
 pythagorasEntry("Hans", "Tester").
@@ -187,27 +189,26 @@ pythagorasEntry("Hans", "Müller").
 pythagorasEntry("Hans", "Holzer").
 pythagorasEntry("Rolf", "Mustermann").
 
-providedCashRatio(Capital, Loan, X):- X = Capital/Loan. 
-# >40% || <=30% || >30% <=40%
-
-propertypricecalculation(Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, Y):- 
-    pointscalculation(  
-        Distance,
-        Rooms,
-        RoomPriceSqm,
-        KitchenSqm,
-        KitchenPriceSqm,
-        Floors,
-        Roof,
-        BasementSqm,
-        Garage,
-        X),
+propertypricecalculation(Distance, Rooms, RoomPriceSqm, KitchenSqm, 
+KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, Y):- 
+        pointscalculation(  
+            Distance,
+            Rooms,
+            RoomPriceSqm,
+            KitchenSqm,
+            KitchenPriceSqm,
+            Floors,
+            Roof,
+            BasementSqm,
+            Garage,
+            X),
+        
     propertysqmprice(X,Y).
 
 pointscalculation(Distance, Rooms, RoomPriceSqm, KitchenSqm, 
 KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, Z):- 
     distance(Distance, N), 
-    roomcount(Rooms, O),  
+    rooms(Rooms, O),  
     roompricesqm(RoomPriceSqm, P), 
     kitchensqm(KitchenSqm,Q), 
     kitchenpricesqm(KitchenPriceSqm,R), 
@@ -217,7 +218,7 @@ KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, Z):-
     garage(Garage,V), 
     Z is (N+O+P+Q+R+S+T+U+V) / 9.
 
-propertysqmprice(X,Y):- X>=1, X<2, Y=300.
+propertysqmprice(X,Y):- X>=1, X<2, Y is 300.
 propertysqmprice(X,Y):- X>=2, X<3, Y=450.
 propertysqmprice(X,Y):- X>=3, X<4, Y=500.
 propertysqmprice(X,Y):- X>=4, X<5, Y=550.
@@ -285,10 +286,39 @@ garage(X,Y):- X="Doppel", Y=5.
 garage(X,Y):- X="Einzel", Y=4.
 garage(X,Y):- X="Gemeinschaft", Y=4.
 garage(X,Y):- X="Carport", Y=2.
-garage(X,Y):- X="Nein", Y=1.
+garage(X,Y):- X="Nein", Y=1.% Depreciation Rate = Depreciation Table (PropertyAge)
+
+% Depreciation = (Building Price + Outbuilding Price) * Depreciation Rate
+
+% Loan = Estate Price + Property Price + Outbuildings Price – Depreciation + Environment + [Correction]
+
+% Required Mortgage = [Loan] - [Capital]
+
+% First Mortgage = (66% of Loan) - [Security]
+
+% Second Mortgage = 14% of [Loan]
+
+% Total Mortgage = First Mortgage + Second Mortgage
+
+% Mortgage Interest = 5% (First Mortgage + Second Mortgage)
+
+% Additional Costs p.a. = 1% of Loan excl. Property Price p.a.
+
+% Total Liabilities p.a. = Additional Costs p.a. + Mortgage Interest p.a.
+
+% Calculatory Affordability = Total Liabilities / [Income]
+
+% Provided Cash Ratio = Capital/Loan
+% =========================================================
 
 
 ========================================================= SUCCESS ======================================
+
+% Example Mortage Application
+isApproved("Holger", "Wache", 20, 300000, 50000, 150000, 500, 1000, 200, 10, 5 , 200, 20, 200, 3, "Sheddach", 200, "Doppel" ).
+% Add more examples here
+
+% INPUT - Example Queries
 
 isApproved(FirstName, LastName, PropertyAge, Income, Capital, Security, EstateSqm, EstatePriceSqm, PropertyM3, Distance, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage):- 
     loan(EstateSqm, EstatePriceSqm, Distance, PropertyM3, Rooms, RoomPriceSqm, KitchenSqm, KitchenPriceSqm, Floors, Roof, BasementSqm, Garage,PropertyAge, X), 
@@ -317,8 +347,12 @@ isApprovedLevelZEK(FirstName, LastName):-
     not(zekEntry(FirstName, LastName)).
 
 
+% Calculations
+% =========================================================
+% Estate Price = [Estate m2] * [Estate Price per m2]
 estateprice(EstateSqm, EstatePriceSqm, X):- X is EstateSqm * EstatePriceSqm.
 
+% Property Price =[ Building m3] * [Property Price per m3]
 propertyprice(  
     Propertym3, 
     Distance, 
@@ -343,6 +377,7 @@ propertyprice(
         	X),
         Y is Propertym3 * X.
 
+% Depreciation Rate = Depreciation Table (PropertyAge)
 depreciationrate(PropertyAge,Y):- PropertyAge=<5, Y=1.
 depreciationrate(PropertyAge,Y):- PropertyAge=<10, PropertyAge>5, Y=3.
 depreciationrate(PropertyAge,Y):- PropertyAge=<15, PropertyAge>10, Y=7.
@@ -363,8 +398,9 @@ depreciationrate(PropertyAge,Y):- PropertyAge=<90, PropertyAge>85, Y=80.
 depreciationrate(PropertyAge,Y):- PropertyAge=<95, PropertyAge>90, Y=86.
 depreciationrate(PropertyAge,Y):- PropertyAge>95, Y=92.
 
-depreciation(PropertyPrice,PropertyAge,Z):- depreciationrate(PropertyAge, X), Z is PropertyPrice * X.
+depreciation(PropertyPrice,PropertyAge,Z):- depreciationrate(PropertyAge, X), Z is PropertyPrice * (X/100).
 
+% Loan = Estate Price + Property Price  – Depreciation
 loan(EstateSqm, 
      EstatePriceSqm, 
      Distance,
@@ -394,17 +430,29 @@ loan(EstateSqm,
         depreciation(V, PropertyAge,W), 
         X is U+V-W.
 
+% First Mortgage = (66% of loan) - [Security]
 firstMortgage(Loan,Security,X):- X is (Loan * 0.66) - Security.
+
+% Second Mortgage = 14% of [loan]
 secondMortgage(Loan,X):- X is (Loan * 0.14).
 
+% Mortgage Interest = 5% (First Mortgage + Second Mortgage)
 mortageInterest(Loan, Security, Z):- firstMortgage(Loan, Security, X), secondMortgage(Loan, Y), Z is (X+Y) * 0.05.
 
+% Additional Costs p.a. = 1% of Loan p.a.
 additionalCost(Loan,X):- X is (Loan * 0.01).
+
+% Total Liabilities p.a. = Additional Costs p.a. + Mortgage Interest p.a.
 totalLiabilites(Loan, Security, Z):-  additionalCost(Loan, X), mortageInterest(Loan, Security, Y), Z is X+Y.
+
+% Calculatory Affordability = Total Liabilities / [Income]
 calculatoryAfforadbility(Loan, Income, Security, Z):- totalLiabilites(Loan, Security, X), Z is X/Income.
-cashRatio(Capital,Loan, X) :- X is Capital/Loan.
 
+% Provided Cash Ratio = Capital/Loan
+providedCashRatio(Capital, Loan, X):- X is (Capital/Loan). 
 
+% Virtual API for ZEK Entries
+% Checks if a Person has a ZEK Entry (which is not good)
 zekEntry("Beatrice", "Sutter").
 zekEntry("Karin", "Keller").
 zekEntry("Peter", "Meier").
@@ -412,14 +460,14 @@ zekEntry("Melanie", "Graber").
 zekEntry("Stephan", "Ospel").
 zekEntry("Holger", "Wache").
 
+% Virtual API for Pythagoras Entry
+% Checks if a Person is in the Pythagoras list (which is not good)
 pythagorasEntry("Max", "Muster").
 pythagorasEntry("Hans", "Glauser").
 pythagorasEntry("Hans", "Tester").
 pythagorasEntry("Hans", "Müller").
 pythagorasEntry("Hans", "Holzer").
 pythagorasEntry("Rolf", "Mustermann").
-
-providedCashRatio(Capital, Loan, X):- X is (Capital/Loan). 
 
 propertypricecalculation(Distance, Rooms, RoomPriceSqm, KitchenSqm, 
 KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, Y):- 
