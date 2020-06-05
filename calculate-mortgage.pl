@@ -1,16 +1,16 @@
 % Calculations
-% =========================================================
+% ===========================================================================
 % Estate Price = [Estate m2] * [Estate Price per m2]
 
 % Property Price per m3 = Property Price Assessment (Property specification)
 
-% Property Price =[ Building m3] * [Property Price per m3]
+% Property Price = [Building m3] * [Property Price per m3]
 
 % Depreciation Rate = Depreciation Table (PropertyAge)
 
-% Depreciation = (Building Price + Outbuilding Price) * Depreciation Rate
+% Depreciation = Building Price * Depreciation Rate
 
-% Loan = Estate Price + Property Price + Outbuildings Price – Depreciation + Environment + [Correction]
+% Loan = Estate Price + Property Price  – Depreciation
 
 % Required Mortgage = [Loan] - [Capital]
 
@@ -29,16 +29,21 @@
 % Calculatory Affordability = Total Liabilities / [Income]
 
 % Provided Cash Ratio = Capital/Loan
-% =========================================================
 
+% ============================================================================
 
-========================================================= SUCCESS ======================================
-
-% Example Mortage Application
+% Example Mortage Application Queries
 isApproved("Holger", "Wache", 20, 300000, 50000, 150000, 500, 1000, 200, 10, 5 , 200, 20, 200, 3, "Sheddach", 200, "Doppel" ).
-isApproved("Hermann", "Grieder", 5, 200000, 150000, 250000, 1000, 650, 350, 2, 7 , 350, 22, 200, 2, "Mansardendach", 100, "Carport" ).
+% False
+
+isApproved("Hermann", "Grieder", 5, 200000, 3000000, 250000, 1000, 650, 350, 2, 3 , 350, 22, 200, 2, "Mansardendach", 100, "Carport" ).
+% True
+
 isApproved("Michael", "Jordan", 15, 5000000, 1500000, 800000, 3000, 2000, 2000, 10, 10 , 400, 100, 400, 7, "Pultdach", 400, "Einzel" ).
+% True
+
 isApproved("Peter", "Pan", 8, 50000, 2500, 150000, 500, 1000, 200, 100, 3, 190, 50, 320, 1, "Flachdach", 600, "Nein" ).
+% False
 
 % INPUT - Queries
 
@@ -208,7 +213,6 @@ KitchenPriceSqm, Floors, Roof, BasementSqm, Garage, Y):-
             BasementSqm,
             Garage,
             X),
-        
     propertysqmprice(X,Y).
 
 pointscalculation(Distance, Rooms, RoomPriceSqm, KitchenSqm, 
